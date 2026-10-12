@@ -1,0 +1,67 @@
+<main class="dashboard-page">
+  <section class="dashboard-content" aria-labelledby="dashboard-title">
+    <div class="welcome">
+      <span class="welcome-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
+          <path d="M8 7h8M8 11h6" />
+        </svg>
+      </span>
+      <span>YOUR WORKSPACE</span>
+    </div>
+
+    <h1 id="dashboard-title">Learning Apps</h1>
+    <p class="intro">A home for your projects. Choose an app to get started.</p>
+
+    <div class="section-heading">
+      <h2>Your apps</h2>
+      <span>2 projects</span>
+    </div>
+
+    <div class="app-cards">
+      <a class="app-card counter-card" routerLink="/counter">
+        <span class="card-topline">
+          <span class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </span>
+          <span class="card-number">01</span>
+        </span>
+        <span class="card-copy">
+          <strong>Counter App</strong>
+          <span>A simple place to practice state and interactions.</span>
+        </span>
+        <span class="card-footer">
+          <span class="card-tag">INTERACTIVE</span>
+          <span class="card-link">Open app <span aria-hidden="true">→</span></span>
+        </span>
+      </a>
+
+      <a class="app-card calculator-card" routerLink="/student-marks-calculator">
+        <span class="card-topline">
+          <span class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="3" width="14" height="18" rx="2" />
+              <path d="M8 7h8M8 11h2m4 0h2m-8 4h2m4 0h2m-8 3h2m4 0h2" />
+            </svg>
+          </span>
+          <span class="card-number">02</span>
+        </span>
+        <span class="card-copy">
+          <strong>Student Marks Calculator</strong>
+          <span>A ready-to-build template for your next project.</span>
+        </span>
+        <span class="card-footer">
+          <span class="card-tag">TEMPLATE</span>
+          <span class="card-link">Open app <span aria-hidden="true">→</span></span>
+        </span>
+      </a>
+    </div>
+
+    <p class="dashboard-note">
+      <span aria-hidden="true">✦</span>
+      Pick a project and keep learning one step at a time.
+    </p>
+  </section>
+</main>

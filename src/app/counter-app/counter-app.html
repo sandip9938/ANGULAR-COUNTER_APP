@@ -1,0 +1,29 @@
+<main class="page">
+  <section class="counter-card" aria-labelledby="counter-title">
+    <p class="eyebrow">A little progress, one step at a time</p>
+    <h1 id="counter-title">Counter</h1>
+
+    <output class="count" aria-live="polite" aria-atomic="true">{{ count() }}</output>
+
+    <div class="controls" aria-label="Counter controls">
+      <button
+        class="control-button secondary"
+        type="button"
+        (click)="numDecrement()"
+        [disabled]="count() === 0"
+        aria-label="Decrease count"
+      >
+        <span aria-hidden="true">−</span>
+        Decrease
+      </button>
+      <button class="control-button primary" type="button" (click)="numIncrement()">
+        <span aria-hidden="true">+</span>
+        Increase
+      </button>
+    </div>
+
+    <button class="reset-button" type="button" (click)="reset()" [disabled]="count() === 0">
+      Reset counter
+    </button>
+  </section>
+</main>

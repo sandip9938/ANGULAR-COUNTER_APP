@@ -1,0 +1,126 @@
+<main class="page">
+  <section class="calculator-layout" aria-labelledby="calculator-title">
+    <header class="page-heading">
+      <p class="eyebrow">Student tools</p>
+      <h1 id="calculator-title">Student Marks Calculator</h1>
+      <p class="intro">Enter your subject marks and calculate your result.</p>
+    </header>
+
+    <section class="calculator-card" aria-labelledby="calculator-form-title">
+      <div class="panel-heading">
+        <span class="panel-icon calculator-icon" aria-hidden="true">01</span>
+        <div>
+          <p class="panel-kicker">STEP 1</p>
+          <h2 id="calculator-form-title">Enter marks</h2>
+        </div>
+      </div>
+
+      <div class="subjects">
+        <div class="field">
+          <label for="mathematics">Mathematics</label>
+          <input
+            id="mathematics"
+            name="mathematics"
+            type="number"
+            min="0"
+            max="100"
+            step="1"
+            placeholder="0 to 100"
+            [(ngModel)]="marks.mathematics"
+            [attr.aria-invalid]="errors.mathematics ? 'true' : null"
+            [attr.aria-describedby]="errors.mathematics ? 'mathematics-error' : null"
+          />
+          @if (errors.mathematics) {
+            <p class="error" id="mathematics-error">{{ errors.mathematics }}</p>
+          }
+        </div>
+        <div class="field">
+          <label for="science">Science</label>
+          <input
+            id="science"
+            name="science"
+            type="number"
+            min="0"
+            max="100"
+            step="1"
+            placeholder="0 to 100"
+            [(ngModel)]="marks.science"
+            [attr.aria-invalid]="errors.science ? 'true' : null"
+            [attr.aria-describedby]="errors.science ? 'science-error' : null"
+          />
+          @if (errors.science) {
+            <p class="error" id="science-error">{{ errors.science }}</p>
+          }
+        </div>
+        <div class="field">
+          <label for="english">English</label>
+          <input
+            id="english"
+            name="english"
+            type="number"
+            min="0"
+            max="100"
+            step="1"
+            placeholder="0 to 100"
+            [(ngModel)]="marks.english"
+            [attr.aria-invalid]="errors.english ? 'true' : null"
+            [attr.aria-describedby]="errors.english ? 'english-error' : null"
+          />
+          @if (errors.english) {
+            <p class="error" id="english-error">{{ errors.english }}</p>
+          }
+        </div>
+      </div>
+
+      <p class="hint">Enter a whole number between 0 and 100 for each subject.</p>
+
+      <div class="actions">
+        <button class="button primary" type="button" (click)="calculateResult()">Calculate Result</button>
+        <button class="button secondary" type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </section>
+
+    <section class="result-card" aria-labelledby="result-title" aria-live="polite">
+      <div class="panel-heading">
+        <span class="panel-icon result-icon" aria-hidden="true">02</span>
+        <div>
+          <p class="panel-kicker">STEP 2</p>
+          <h2 id="result-title">Your result</h2>
+        </div>
+      </div>
+
+      @if (result; as summary) {
+        <div class="result-content">
+          <div class="result-summary" [class.summary-pass]="summary.passed" [class.summary-fail]="!summary.passed">
+            <span class="status" [class.pass]="summary.passed" [class.fail]="!summary.passed">
+              {{ summary.passed ? 'PASS' : 'FAIL' }}
+            </span>
+            <strong>{{ summary.percentage.toFixed(2) }}<small>%</small></strong>
+            <span>Overall percentage</span>
+          </div>
+
+          <div class="result-grid">
+            <div class="result-item total">
+              <span>Total marks</span>
+              <strong>{{ summary.total }} <small>/ 300</small></strong>
+            </div>
+            <div class="result-item"><span>Grade</span><strong>{{ summary.grade }}</strong></div>
+            <div class="result-item"><span>Highest mark</span><strong>{{ summary.highest }}</strong></div>
+            <div class="result-item"><span>Lowest mark</span><strong>{{ summary.lowest }}</strong></div>
+          </div>
+        </div>
+      } @else {
+        <div class="empty-result">
+          <span class="empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 3h10a2 2 0 0 1 2 2v16l-7-4-7 4V5a2 2 0 0 1 2-2Z" />
+              <path d="M9 8h6M9 12h6" />
+            </svg>
+          </span>
+          <strong>Your result will appear here</strong>
+          <span>Enter marks on the left, then select Calculate Result.</span>
+        </div>
+      }
+    </section>
+  </section>
+</main>

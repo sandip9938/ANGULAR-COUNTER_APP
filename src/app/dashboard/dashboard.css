@@ -1,0 +1,247 @@
+.dashboard-page {
+  min-height: calc(100vh - 4.5rem);
+  display: grid;
+  place-items: center;
+  padding: clamp(2rem, 7vw, 5rem) 1.25rem;
+  background:
+    radial-gradient(ellipse at 8% 12%, rgb(129 140 248 / 13%), transparent 32%),
+    radial-gradient(ellipse at 90% 88%, rgb(45 212 191 / 12%), transparent 30%),
+    #f7f8fc;
+  color: #20243a;
+}
+
+.dashboard-content {
+  width: min(100%, 62rem);
+}
+
+.welcome {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
+  color: #7069c7;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.welcome-icon {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  color: #6558dc;
+  background: #eeecff;
+  border-radius: 0.65rem;
+}
+
+.welcome-icon svg {
+  width: 1.1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+h1 {
+  margin: 0;
+  color: #242840;
+  font-size: clamp(2.35rem, 7vw, 3.75rem);
+  letter-spacing: -0.06em;
+  line-height: 1.05;
+}
+
+.intro {
+  margin: 0.8rem 0 2.8rem;
+  color: #72768a;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: #30344c;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.section-heading > span {
+  color: #85899b;
+  font-size: 0.85rem;
+}
+
+.app-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+.app-card {
+  min-height: 16rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.5rem;
+  color: inherit;
+  background: rgb(255 255 255 / 92%);
+  border: 1px solid #ececf5;
+  border-radius: 1.25rem;
+  box-shadow: 0 0.75rem 2rem rgb(37 42 83 / 5%);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.app-card:hover {
+  transform: translateY(-4px);
+  border-color: #dedcfb;
+  box-shadow: 0 1.25rem 2.75rem rgb(37 42 83 / 10%);
+}
+
+.app-card:focus-visible {
+  outline: 3px solid #a9a2ff;
+  outline-offset: 3px;
+}
+
+.card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  display: grid;
+  place-items: center;
+  color: #5148c8;
+  background: linear-gradient(145deg, #f1efff, #e9e7ff);
+  border-radius: 1rem;
+}
+
+.card-icon svg {
+  width: 1.45rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.card-number {
+  color: #c4c5d2;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.calculator-card .card-icon {
+  color: #14745d;
+  background: linear-gradient(145deg, #e8faf3, #ddf4eb);
+}
+
+.card-copy {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.6rem 0 1.5rem;
+}
+
+.card-copy strong {
+  color: #2c3048;
+  font-size: 1.2rem;
+  letter-spacing: -0.025em;
+}
+
+.card-copy > span {
+  color: #777b90;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f6;
+}
+
+.card-tag {
+  padding: 0.35rem 0.55rem;
+  color: #6e7190;
+  background: #f5f5fa;
+  border-radius: 0.45rem;
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.calculator-card .card-tag {
+  color: #24745f;
+  background: #eaf7f1;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #5148c8;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.card-link > span {
+  font-size: 1.15rem;
+  transition: transform 180ms ease;
+}
+
+.app-card:hover .card-link > span {
+  transform: translateX(3px);
+}
+
+.calculator-card .card-link {
+  color: #14745d;
+}
+
+.dashboard-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.7rem 0 0;
+  color: #85899b;
+  font-size: 0.85rem;
+}
+
+.dashboard-note > span {
+  color: #8a80e8;
+  font-size: 1rem;
+}
+
+@media (max-width: 40rem) {
+  .intro {
+    margin-bottom: 2rem;
+  }
+
+  .app-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .app-card {
+    min-height: 14rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-card,
+  .card-link > span {
+    transition: none;
+  }
+}
