@@ -18,7 +18,7 @@ A small, responsive counter built with Angular. Increase the value, decrease it 
 - Angular 22
 - TypeScript
 - CSS
-- Vitest
+- HTML
 
 ## Getting started
 
