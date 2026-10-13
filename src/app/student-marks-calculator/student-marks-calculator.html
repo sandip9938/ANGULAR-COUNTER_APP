@@ -1,0 +1,164 @@
+<!-- Main page wrapper: calculator aur result dono isi ke andar hain. -->
+<main class="page">
+  <section class="calculator-layout" aria-labelledby="calculator-title">
+    <!-- Page ka title aur chhota introduction. -->
+    <header class="page-heading">
+      <p class="eyebrow">Student tools</p>
+      <h1 id="calculator-title">Student Marks Calculator</h1>
+      <p class="intro">Enter your subject marks and calculate your result.</p>
+    </header>
+
+    <!-- STEP 1: User yahan subject names aur marks enter karta hai. -->
+    <section class="calculator-card" aria-labelledby="calculator-form-title">
+      <div class="panel-heading">
+        <span class="panel-icon calculator-icon" aria-hidden="true">01</span>
+        <div>
+          <p class="panel-kicker">STEP 1</p>
+          <h2 id="calculator-form-title">Enter marks</h2>
+        </div>
+      </div>
+
+      <div class="subjects">
+        <!-- subjects list me jitne items hain, Angular utne input rows banata hai.
+             track subject.id se Angular har row ko alag pehchanta hai. -->
+        @for (subject of subjects; track subject.id) {
+          <div class="subject-row">
+            <div class="field">
+              <label [for]="'subject-name-' + subject.id">Subject name</label>
+              <!-- Unique id/name label ko row se jodte hain; ngModel naam ko TS data se sync karta hai. -->
+              <input
+                [id]="'subject-name-' + subject.id"
+                [name]="'subject-name-' + subject.id"
+                type="text"
+                placeholder="e.g. History"
+                [(ngModel)]="subject.name"
+                [attr.aria-invalid]="subject.nameError ? 'true' : null"
+                [attr.aria-describedby]="
+                  subject.nameError ? 'subject-name-error-' + subject.id : null
+                "
+              />
+              <!-- Naam invalid ho to usi input ke neeche uska error message dikhate hain. -->
+              @if (subject.nameError) {
+                <p class="error" [id]="'subject-name-error-' + subject.id">
+                  {{ subject.nameError }}
+                </p>
+              }
+            </div>
+
+            <div class="field">
+              <label [for]="'subject-mark-' + subject.id">Marks</label>
+              <!-- Marks input ki value ngModel se isi subject ke mark property me save hoti hai. -->
+              <input
+                [id]="'subject-mark-' + subject.id"
+                [name]="'subject-mark-' + subject.id"
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                placeholder="0 to 100"
+                [(ngModel)]="subject.mark"
+                [attr.aria-invalid]="subject.markError ? 'true' : null"
+                [attr.aria-describedby]="
+                  subject.markError ? 'subject-mark-error-' + subject.id : null
+                "
+              />
+              <!-- Marks galat/missing hon to validation message yahan dikhai deta hai. -->
+              @if (subject.markError) {
+                <p class="error" [id]="'subject-mark-error-' + subject.id">
+                  {{ subject.markError }}
+                </p>
+              }
+            </div>
+
+            <!-- Last subject ko delete nahi kar sakte; click par TS list se subject hataata hai. -->
+            <button
+              class="remove-button"
+              type="button"
+              [disabled]="subjects.length === 1"
+              [attr.aria-label]="'Remove ' + (subject.name || 'subject')"
+              (click)="removeSubject(subject.id)"
+            >
+              Remove
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- Click par TypeScript list me ek naya blank subject add karta hai. -->
+      <button class="button add-subject" type="button" (click)="addSubject()">Add Subject</button>
+
+      <p class="hint">
+        Enter a subject name and a whole number between 0 and 100 for each subject.
+      </p>
+
+      <div class="actions">
+        <!-- Click par validation aur result calculation TypeScript me hoti hai. -->
+        <button class="button primary" type="button" (click)="calculateResult()">
+          Calculate Result
+        </button>
+        <!-- Reset inputs, validation errors aur result ko initial state me laata hai. -->
+        <button class="button secondary" type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </section>
+
+    <!-- STEP 2: Calculation ka result ya initial empty message yahan dikhai deta hai. -->
+    <section class="result-card" aria-labelledby="result-title" aria-live="polite">
+      <div class="panel-heading">
+        <span class="panel-icon result-icon" aria-hidden="true">02</span>
+        <div>
+          <p class="panel-kicker">STEP 2</p>
+          <h2 id="result-title">Your result</h2>
+        </div>
+      </div>
+
+      <!-- result null nahi hai to summary naam se result values template me use karo. -->
+      @if (result; as summary) {
+        <div class="result-content">
+          <div
+            class="result-summary"
+            [class.summary-pass]="summary.passed"
+            [class.summary-fail]="!summary.passed"
+          >
+            <!-- passed true/false ke mutabiq PASS/FAIL text aur CSS class badalti hai. -->
+            <span class="status" [class.pass]="summary.passed" [class.fail]="!summary.passed">
+              {{ summary.passed ? 'PASS' : 'FAIL' }}
+            </span>
+            <strong>{{ summary.percentage.toFixed(2) }}<small>%</small></strong>
+            <span>Overall percentage</span>
+          </div>
+
+          <div class="result-grid">
+            <div class="result-item total">
+              <span>Total marks</span>
+              <!-- Maximum marks dynamic hain: subject count multiplied by 100. -->
+              <strong
+                >{{ summary.total }} <small>/ {{ summary.maxMarks }}</small></strong
+              >
+            </div>
+            <div class="result-item">
+              <span>Grade</span><strong>{{ summary.grade }}</strong>
+            </div>
+            <div class="result-item">
+              <span>Highest mark</span><strong>{{ summary.highest }}</strong>
+            </div>
+            <div class="result-item">
+              <span>Lowest mark</span><strong>{{ summary.lowest }}</strong>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <!-- Jab tak calculate nahi hota ya result invalid hai, yeh placeholder dikhai deta hai. -->
+        <div class="empty-result">
+          <span class="empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 3h10a2 2 0 0 1 2 2v16l-7-4-7 4V5a2 2 0 0 1 2-2Z" />
+              <path d="M9 8h6M9 12h6" />
+            </svg>
+          </span>
+          <strong>Your result will appear here</strong>
+          <span>Enter marks on the left, then select Calculate Result.</span>
+        </div>
+      }
+    </section>
+  </section>
+</main>
